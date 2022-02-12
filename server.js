@@ -47,10 +47,58 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //___________________
 // Routes
 //___________________
-//localhost:3000
-app.get('/' , (req, res) => {
-  res.send('Hello World!');
+// //localhost:3000
+// app.get('/' , (req, res) => {
+//   res.send('Hello World!');
+// });
+
+//GET
+//___________________
+
+//list of all meals
+app.get('/meals' , (req, res) => {
+  res.render('index.ejs');
 });
+
+//new meal
+app.get('/meals/new' , (req, res) => {
+  res.render('new.ejs');
+});
+
+//view meal (probably won't use)
+app.get('/meals/:id' , (req, res) => {
+  res.render('edit.ejs');
+});
+
+//edit meal
+app.get('/meals/:id/edit' , (req, res) => {
+  res.render('edit.ejs');
+});
+
+//POST
+//___________________
+
+//create meal
+app.post('/meals' , (req, res) => {
+});
+
+//PUT
+//___________________
+
+//update meal
+app.put('/meals/:id' , (req, res) => {
+  res.render('edit.ejs');
+});
+
+//DELETE
+//___________________
+
+//delete meal
+app.delete('/meals/:id' , (req, res) => {
+  res.render('edit.ejs');
+});
+
+
 
 //___________________
 //Listener
