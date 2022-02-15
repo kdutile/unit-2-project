@@ -7,6 +7,7 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
+
 //___________________
 //Port
 //___________________
@@ -28,6 +29,9 @@ mongoose.connect(MONGODB_URI);
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
+
+// Schema
+const Meal = require('./models/mealSchema.js')
 
 //___________________
 //Middleware
