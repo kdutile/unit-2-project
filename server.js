@@ -70,7 +70,9 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
 //list of all meals
 app.get('/meals' , (req, res) => {
-  res.render('index.ejs');
+  Meal.find({}, (err, allMeals) => {
+    res.render('index.ejs', {allMeals});
+  })
 });
 
 //new meal
