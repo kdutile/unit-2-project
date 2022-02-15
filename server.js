@@ -30,8 +30,9 @@ db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-// Schema
+// Schema & initial seed
 const Meal = require('./models/mealSchema.js')
+const mealSeed = require('./models/someMeals.js')
 
 //___________________
 //Middleware
@@ -55,6 +56,14 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // app.get('/' , (req, res) => {
 //   res.send('Hello World!');
 // });
+
+// // seed the db
+// app.get('/meals/seed', (req, res) => {
+//   Meal.create(mealSeed, (err, data) => {
+//     res.redirect('/meals');
+//   });
+// });
+
 
 //GET
 //___________________
