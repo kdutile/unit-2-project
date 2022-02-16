@@ -34,12 +34,18 @@
                 <p><%=meal.allergies%></p>
               </div>
               <div class="card-action">
-                <%console.log(meal.id);%>
-                <form action="/meals/<%=meal.id%>?_method=DELETE" method="POST">
-                  <button class="btn waves-effect waves-light" type="submit" name="action">
-                    <i class="material-icons left">delete</i>Delete
-                  </button>
-                </form>
+                <div class="row">
+                  <div class="col">
+                    <a class="waves-effect waves-light btn" href="/meals/<%=meal.id%>/edit"><i class="material-icons left">edit</i>Edit</a>
+                  </div>
+                  <div class="col">
+                    <form action="/meals/<%=meal.id%>?_method=DELETE" method="POST">
+                      <button class="btn waves-effect waves-light" type="submit" name="action">
+                        <i class="material-icons left">delete</i>Delete
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

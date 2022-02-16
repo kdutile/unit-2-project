@@ -87,7 +87,9 @@ app.get('/meals/:id' , (req, res) => {
 
 //edit meal
 app.get('/meals/:id/edit' , (req, res) => {
-  res.render('edit.ejs');
+  Meal.findById(req.params.id, (err, foundMeal) => {
+    res.render('edit.ejs', {meal:foundMeal});
+  });
 });
 
 //POST
@@ -108,7 +110,12 @@ app.post('/meals' , (req, res) => {
 
 //update meal
 app.put('/meals/:id' , (req, res) => {
-  res.render('edit.ejs');
+  if (req.body.img === '') {
+    req.body.img = 'https://i.imgur.com/YajXMEa.png';
+  };
+  Meal.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, editedMeal) => {
+    res.redirect('/meals');
+  });
 });
 
 //DELETE
