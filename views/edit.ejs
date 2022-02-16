@@ -13,21 +13,32 @@
   <body>
     <div class="container">
       <h1>Edit Meal</h1>
+      <section>
+        <div class="row">
+          <div class="col">
+            <a class="waves-effect waves-light btn" href="/meals">Home</a>
+          </div>
+          <div class="col">
+            <a class="waves-effect waves-light btn" href="/meals/new">New meal</a>
+          </div>
+        </div>
+      </section>
+
       <div class="row">
         <form class="col s12" action="/meals/<%=meal.id%>?_method=PUT" method="POST">
           <div class="row">
             <div class="input-field col s6">
-              <input id="meal_name" type="text" class="validate" name="name" value="<%=meal.name%>">
+              <input id="meal_name" placeholder="" type="text" class="validate" name="name" value="<%=meal.name%>">
               <label for="meal_name">Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="img_url" type="text" class="validate" name="img" value="<%=meal.img%>">
+              <input id="img_url" placeholder="" type="text" class="validate" name="img" value="<%=meal.img%>">
               <label for="img_rul">Image URL</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="meal_description" type="text" class="validate" name="description" value="<%=meal.description%>">
+              <input id="meal_description" placeholder="" type="text" class="validate" name="description" value="<%=meal.description%>">
               <label for="meal_description">Description</label>
             </div>
           </div>

@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Meals</h1>
+      <h1>Meal Details</h1>
       <section>
         <div class="row">
           <div class="col">
@@ -25,7 +25,6 @@
       </section>
       <section>
         <div class="row">
-          <% for (const [i, meal] of allMeals.entries()) { %>
           <div class="col s12 m6 l4">
             <div class="card">
               <div class="card-image">
@@ -44,15 +43,12 @@
               </div>
               <div class="card-action">
                 <div class="row">
-                  <div class="col s4">
-                    <a class="waves-effect waves-light btn-small" href="/meals/<%=meal.id%>"><i class="material-icons left">pageview</i>View</a>
+                  <div class="col">
+                    <a class="waves-effect waves-light btn" href="/meals/<%=meal.id%>/edit"><i class="material-icons left">edit</i>Edit</a>
                   </div>
-                  <div class="col s4">
-                    <a class="waves-effect waves-light btn-small" href="/meals/<%=meal.id%>/edit"><i class="material-icons left">edit</i>Edit</a>
-                  </div>
-                  <div class="col s4">
+                  <div class="col">
                     <form action="/meals/<%=meal.id%>?_method=DELETE" method="POST">
-                      <button class="waves-effect waves-light btn-small" type="submit" name="action">
+                      <button class="btn waves-effect waves-light" type="submit" name="action">
                         <i class="material-icons left">delete</i>Delete
                       </button>
                     </form>
@@ -61,7 +57,6 @@
               </div>
             </div>
           </div>
-          <% } %>
         </div>
       </section>
     </div>

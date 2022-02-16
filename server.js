@@ -82,7 +82,9 @@ app.get('/meals/new' , (req, res) => {
 
 //view meal (probably won't use)
 app.get('/meals/:id' , (req, res) => {
-  res.render('edit.ejs');
+  Meal.findById(req.params.id, (err, foundMeal) => {
+    res.render('show.ejs', {meal:foundMeal});
+  });
 });
 
 //edit meal
