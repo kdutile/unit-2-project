@@ -95,6 +95,12 @@ app.get('/meals/:id/edit' , (req, res) => {
 
 //create meal
 app.post('/meals' , (req, res) => {
+  if (req.body.img === '') {
+    req.body.img = 'https://i.imgur.com/YajXMEa.png';
+  };
+  Meal.create(req.body, (err, createdMeal) => {
+    res.redirect('/meals');
+  });
 });
 
 //PUT
@@ -109,8 +115,11 @@ app.put('/meals/:id' , (req, res) => {
 //___________________
 
 //delete meal
-app.delete('/meals/:id' , (req, res) => {
-  res.render('edit.ejs');
+app.delete('/meals/:id', (req, res) => {
+  // find meal by _id and delete
+  Meal.findByIdAndRemove(req.params.id, (err, removeMeal) => {
+    res.redirect('/meals');
+  });
 });
 
 
