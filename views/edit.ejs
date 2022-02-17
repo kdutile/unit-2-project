@@ -23,7 +23,6 @@
           </div>
         </div>
       </section>
-
       <div class="row">
         <form class="col s12" action="/meals/<%=meal.id%>?_method=PUT" method="POST">
           <div class="row">
@@ -43,19 +42,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
-              <label>Dietary restrictions and allergies</label>
-              <select class="browser-default" name="allergies">
-                <option value="" disabled selected>Choose your option</option>
-                <% const allergies = ['','Vegan','Vegetarian','Dairy','Nuts','Gluten','Shellfish'];
+            <div class="input-field col s6">
+              <select multiple name="allergies">
+                <option value="" disabled>Choose your option(s)</option>
+                <% const allergies = ['Vegan','Vegetarian','Dairy','Nuts','Gluten','Shellfish'];
                 for (let each of allergies) { %>
                   <option value="<%=each%>"
-                    <% if (each === meal.allergies[0]) { %>
+                    <% if (meal.allergies.includes(each)) { %>
                       selected
                     <% } %>
                     ><%=each%></option>
                   <% } %>
               </select>
+              <label>Dietary restrictions and allergies</label>
             </div>
           </div>
           <div class="row">
@@ -69,5 +68,6 @@
         </div>
     </div>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/select.js"></script>
   </body>
 </html>

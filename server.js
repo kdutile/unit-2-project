@@ -30,8 +30,9 @@ db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected: ', MONGODB_URI));
 db.on('disconnected', () => console.log('mongo disconnected'));
 
-// Schema & initial seed
+// Schemas & initial seeds
 const Meal = require('./models/mealSchema.js')
+const Day = require('./models/daySchema.js')
 const mealSeed = require('./models/someMeals.js')
 
 //___________________
@@ -75,9 +76,21 @@ app.get('/meals' , (req, res) => {
   })
 });
 
+//list of all days
+app.get('/days' , (req, res) => {
+  Day.find({}, (err, allDays) => {
+    res.render('days/index.ejs', {allDays});
+  })
+});
+
 //new meal
 app.get('/meals/new' , (req, res) => {
   res.render('new.ejs');
+});
+
+//new day (, it's a new life for me)
+app.get('/days/new' , (req, res) => {
+  res.render('days/new.ejs');
 });
 
 //view meal (probably won't use)
@@ -87,10 +100,24 @@ app.get('/meals/:id' , (req, res) => {
   });
 });
 
+//view day (want this to be my only visible page for customer)
+app.get('/days/:id' , (req, res) => {
+  Day.findById(req.params.id, (err, foundDay) => {
+    res.render('days/show.ejs', {day:foundDay});
+  });
+});
+
 //edit meal
 app.get('/meals/:id/edit' , (req, res) => {
   Meal.findById(req.params.id, (err, foundMeal) => {
     res.render('edit.ejs', {meal:foundMeal});
+  });
+});
+
+//edit day
+app.get('/days/:id/edit' , (req, res) => {
+  Day.findById(req.params.id, (err, foundDay) => {
+    res.render('days/edit.ejs', {day:foundDay});
   });
 });
 
