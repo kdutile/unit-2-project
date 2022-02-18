@@ -12,21 +12,52 @@
   </head>
   <body>
     <div class="container">
-      <h1>Meals</h1>
+      <h1>Today's Special</h1>
       <section>
         <div class="row">
-          <div class="col">
-            <a class="waves-effect waves-light btn" href="/meals">Home</a>
+          <div class="col s12 m12 l6">
+            <h2>Lunch</h2>
+            <div class="card">
+              <div class="card-image">
+                <img src="<%=day.lunch.img%>">
+              </div>
+              <div class="card-content">
+                <span class="card-title"><%=day.lunch.name%></span>
+                <p><%=day.lunch.description%></p>
+                <div class="section no-pad-bot">
+                  <% for (let allergy of day.lunch.allergies) { %>
+                    <div class="chip">
+                      <%=allergy%>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col">
-            <a class="waves-effect waves-light btn" href="/meals/new">New meal</a>
+          <div class="col s12 m12 l6">
+            <h2>Dinner</h2>
+            <div class="card">
+              <div class="card-image">
+                <img src="<%=day.dinner.img%>">
+              </div>
+              <div class="card-content">
+                <span class="card-title"><%=day.dinner.name%></span>
+                <p><%=day.dinner.description%></p>
+                <div class="section no-pad-bot">
+                  <% for (let allergy of day.dinner.allergies) { %>
+                    <div class="chip">
+                      <%=allergy%>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-      <section>
         <div class="row">
-          <% for (const [i, meal] of allMeals.entries()) { %>
-          <div class="col s12 m6 l4">
+          <h2>Heat & Eat</h2>
+          <% for (let meal of day.prepared) { %>
+          <div class="col s12 m12 l6">
             <div class="card">
               <div class="card-image">
                 <img src="<%=meal.img%>">
@@ -40,13 +71,6 @@
                       <%=allergy%>
                     </div>
                   <% } %>
-                </div>
-              </div>
-              <div class="card-action">
-                <div class="row">
-                  <div class="col">
-                    <a class="waves-effect waves-light btn-small" href="/meals/<%=meal.id%>"><i class="material-icons left">pageview</i>View</a>
-                  </div>
                 </div>
               </div>
             </div>

@@ -69,10 +69,28 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 //GET
 //___________________
 
+//display page
+app.get('/' , (req, res) => {
+  const today = new Date();
+  const year = today.getFullYear().toString();
+  const day = today.getDate().toString().padStart(2,'0');
+  const month = (today.getMonth() + 1).toString().padStart(2,'0');
+  const formattedDate = `${month}/${day}/${year}`;
+  console.log(formattedDate);
+
+  Day.findOne({date:formattedDate}).populate('lunch').populate('dinner').populate('prepared').exec((err, foundDay) => {
+    if (err) {
+      res.send('Sorry, we haven\'t posted today\'s specials yet!');
+    } else {
+      res.render('index.ejs', {day:foundDay});
+    }
+  });
+});
+
 //list of all meals
 app.get('/meals' , (req, res) => {
   Meal.find({}, (err, allMeals) => {
-    res.render('index.ejs', {allMeals});
+    res.render('meals/index.ejs', {allMeals});
   });
 });
 
@@ -85,7 +103,7 @@ app.get('/days' , (req, res) => {
 
 //new meal
 app.get('/meals/new' , (req, res) => {
-  res.render('new.ejs');
+  res.render('meals/new.ejs');
 });
 
 //new day (, it's a new life for me)
@@ -98,7 +116,7 @@ app.get('/days/new' , (req, res) => {
 //view meal (probably won't use)
 app.get('/meals/:id' , (req, res) => {
   Meal.findById(req.params.id, (err, foundMeal) => {
-    res.render('show.ejs', {meal:foundMeal});
+    res.render('meals/show.ejs', {meal:foundMeal});
   });
 });
 
@@ -112,7 +130,7 @@ app.get('/days/:id' , (req, res) => {
 //edit meal
 app.get('/meals/:id/edit' , (req, res) => {
   Meal.findById(req.params.id, (err, foundMeal) => {
-    res.render('edit.ejs', {meal:foundMeal});
+    res.render('meals/edit.ejs', {meal:foundMeal});
   });
 });
 
