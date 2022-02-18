@@ -23,10 +23,59 @@
           </div>
         </div>
       </section>
-      <section>
-
-      </section>
+      <div class="row">
+        <form class="col s12" action="/days" method="POST">
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="date" type="text" class="datepicker" name="date">
+              <label for="date">Date</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <select class="icons" name="lunch">
+                <option value="" disabled selected>Choose your option</option>
+                <% for (let meal of allMeals) { %>
+                  <option value="<%=meal.id%>" data-icon="<%=meal.img%>"><%=meal.name%></option>
+                <% } %>
+              </select>
+              <label>Lunch</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <select class="icons" name="dinner">
+                <option value="" disabled selected>Choose your option</option>
+                <% for (let meal of allMeals) { %>
+                  <option value="<%=meal.id%>" data-icon="<%=meal.img%>"><%=meal.name%></option>
+                <% } %>
+              </select>
+              <label>Dinner</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <select multiple name="prepared">
+                <option value="" disabled>Choose your option(s)</option>
+                <% for (let meal of allMeals) { %>
+                  <option value="<%=meal.id%>"><%=meal.name%></option>
+                <% } %>
+              </select>
+              <label>Prepared Meals</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/select.js"></script>
+    <script type="text/javascript" src="/js/datepicker.js"></script>
   </body>
 </html>

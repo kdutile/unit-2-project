@@ -24,7 +24,32 @@
         </div>
       </section>
       <section>
-
+        <table class="striped responsive-table">
+          <thead>
+            <tr>
+                <th>Date</th>
+                <th>Lunch</th>
+                <th>Dinner</th>
+                <th>Heat & Eat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let day of allDays) { %>
+              <tr>
+                <td>
+                  <a href="/days/<%=day.id%>"><%=day.date%></a>
+                </td>
+                <td><a href="/meals/<%=day.lunch.id%>"><%=day.lunch.name%></a></td>
+                <td><a href="/meals/<%=day.dinner.id%>"><%=day.dinner.name%></a></td>
+                <td>|
+                  <% for (let meal of day.prepared) { %>
+                    <a href="/meals/<%=meal.id%>"><%=meal.name%></a> |
+                  <% } %>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
       </section>
     </div>
     <script type="text/javascript" src="/js/materialize.min.js"></script>

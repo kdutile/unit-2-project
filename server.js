@@ -73,14 +73,14 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 app.get('/meals' , (req, res) => {
   Meal.find({}, (err, allMeals) => {
     res.render('index.ejs', {allMeals});
-  })
+  });
 });
 
 //list of all days
 app.get('/days' , (req, res) => {
-  Day.find({}, (err, allDays) => {
+  Day.find({}).populate('lunch').populate('dinner').populate('prepared').exec((err, allDays) => {
     res.render('days/index.ejs', {allDays});
-  })
+  });
 });
 
 //new meal
@@ -90,7 +90,9 @@ app.get('/meals/new' , (req, res) => {
 
 //new day (, it's a new life for me)
 app.get('/days/new' , (req, res) => {
-  res.render('days/new.ejs');
+  Meal.find({}, (err, allMeals) => {
+    res.render('days/new.ejs', {allMeals});
+  });
 });
 
 //view meal (probably won't use)
@@ -102,7 +104,7 @@ app.get('/meals/:id' , (req, res) => {
 
 //view day (want this to be my only visible page for customer)
 app.get('/days/:id' , (req, res) => {
-  Day.findById(req.params.id, (err, foundDay) => {
+  Day.findById(req.params.id).populate('lunch').populate('dinner').populate('prepared').exec((err, foundDay) => {
     res.render('days/show.ejs', {day:foundDay});
   });
 });
@@ -116,8 +118,14 @@ app.get('/meals/:id/edit' , (req, res) => {
 
 //edit day
 app.get('/days/:id/edit' , (req, res) => {
-  Day.findById(req.params.id, (err, foundDay) => {
-    res.render('days/edit.ejs', {day:foundDay});
+  Day.findById(req.params.id).populate('lunch').populate('dinner').populate('prepared').exec((err, foundDay) => {
+    Meal.find({}, (err, allMeals) => {
+      res.render('days/edit.ejs',
+      {
+        day:foundDay,
+        allMeals:allMeals
+      });
+    });
   });
 });
 
@@ -134,6 +142,13 @@ app.post('/meals' , (req, res) => {
   });
 });
 
+//create day
+app.post('/days' , (req, res) => {
+  Day.create(req.body, (err, createdDay) => {
+    res.redirect('/days');
+  });
+});
+
 //PUT
 //___________________
 
@@ -144,6 +159,13 @@ app.put('/meals/:id' , (req, res) => {
   };
   Meal.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, editedMeal) => {
     res.redirect('/meals');
+  });
+});
+
+//update day
+app.put('/days/:id' , (req, res) => {
+  Day.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, editedDay) => {
+    res.redirect('/days');
   });
 });
 
@@ -158,7 +180,13 @@ app.delete('/meals/:id', (req, res) => {
   });
 });
 
-
+//delete meal
+app.delete('/days/:id', (req, res) => {
+  // find meal by _id and delete
+  Day.findByIdAndRemove(req.params.id, (err, removeDay) => {
+    res.redirect('/days');
+  });
+});
 
 //___________________
 //Listener
