@@ -21,6 +21,81 @@
           <div class="col">
             <a class="waves-effect waves-light btn" href="/days/new">New day</a>
           </div>
+          <div class="col">
+            <a class="waves-effect waves-light btn" href="/days/<%=day.id%>/edit"><i class="material-icons left">edit</i>Edit day</a>
+          </div>
+          <div class="col">
+            <form action="/days/<%=day.id%>?_method=DELETE" method="POST">
+              <button class="btn waves-effect waves-light" type="submit" name="action">
+                <i class="material-icons left">delete</i>Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="row">
+          <div class="col s12 m12 l6">
+            <h2>Lunch</h2>
+            <div class="card">
+              <div class="card-image">
+                <img src="<%=day.lunch.img%>">
+              </div>
+              <div class="card-content">
+                <span class="card-title"><%=day.lunch.name%></span>
+                <p><%=day.lunch.description%></p>
+                <div class="section no-pad-bot">
+                  <% for (let allergy of day.lunch.allergies) { %>
+                    <div class="chip">
+                      <%=allergy%>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m12 l6">
+            <h2>Dinner</h2>
+            <div class="card">
+              <div class="card-image">
+                <img src="<%=day.dinner.img%>">
+              </div>
+              <div class="card-content">
+                <span class="card-title"><%=day.dinner.name%></span>
+                <p><%=day.dinner.description%></p>
+                <div class="section no-pad-bot">
+                  <% for (let allergy of day.dinner.allergies) { %>
+                    <div class="chip">
+                      <%=allergy%>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <h2>Heat & Eat</h2>
+          <% for (let meal of day.prepared) { %>
+          <div class="col s12 m12 l6">
+            <div class="card">
+              <div class="card-image">
+                <img src="<%=meal.img%>">
+              </div>
+              <div class="card-content">
+                <span class="card-title"><%=meal.name%></span>
+                <p><%=meal.description%></p>
+                <div class="section no-pad-bot">
+                  <% for (let allergy of meal.allergies) { %>
+                    <div class="chip">
+                      <%=allergy%>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
         </div>
       </section>
     </div>
