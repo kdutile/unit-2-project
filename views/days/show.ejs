@@ -15,12 +15,7 @@
       <h1>Day Details</h1>
       <section>
         <div class="row">
-          <div class="col">
-            <a class="waves-effect waves-light btn" href="/days">Home</a>
-          </div>
-          <div class="col">
-            <a class="waves-effect waves-light btn" href="/days/new">New day</a>
-          </div>
+          <%- include('../partials/daysbuttons.ejs') %>
           <div class="col">
             <a class="waves-effect waves-light btn" href="/days/<%=day.id%>/edit"><i class="material-icons left">edit</i>Edit day</a>
           </div>
@@ -31,6 +26,11 @@
               </button>
             </form>
           </div>
+        </div>
+      </section>
+      <section>
+        <div class="row">
+          <%- include('../partials/mealsbuttons.ejs') %>
         </div>
       </section>
       <section>
